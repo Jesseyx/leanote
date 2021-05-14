@@ -84,6 +84,9 @@ ln -s ../../../../ "$link_path"/leanote
 EOF
 ) "$tmp"/leanote/bin/run.sh
 
+  # move docker env
+  cp -rT "$SCRIPT_PATH"/docker-compose "$tmp"/leanote
+
   # package
   tar -cf "$SCRIPT_PATH/$V/leanote-$1-$2-$V.bin.tar" -C "$tmp" leanote
   gzip "$SCRIPT_PATH/$V/leanote-$1-$2-$V.bin.tar"

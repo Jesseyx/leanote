@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: leanote
+    volumes:
+      - ./mongodb:/data/db
+      - ./mongodb_backup/leanote_install_data:/leanote_install_data
+      - ./db_init.sh:/docker-entrypoint-initdb.d/db_init.sh
+      - ./db_leanote.js:/docker-entrypoint-initdb.d/db_leanote.js
+
+  leanote:
+    depends_on:
+      - mongo
+    restart: always
+    build: .
+    ports:
+      - 9000:9000
+    volumes:
+      - ./conf:/leanote/conf
+      - ./files:/leanote/files
+      - ./public/upload:/leanote/public/upload
+    links:
+      - mongo

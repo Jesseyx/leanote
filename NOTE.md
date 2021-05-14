@@ -7,6 +7,12 @@ docker build -t leanote .
 docker run -v /d/project-test/leanote:/go/src/leanote leanote
 ```
 
+# docker-compose 部署
+
+1. 在 `docker-compose.yml` 中修改 `root` 密码
+2. 在 `db_leanote.js` 中修改 `leanote` 数据库的密码
+3. 将 `leanote` 数据库密码更新到 `conf/app.conf` 中
+4. 修改 `conf/app.conf` 中 `db.host` 为 `mongo`, it's image name in compose
 
 # 剪切板不支持粘贴 html
 

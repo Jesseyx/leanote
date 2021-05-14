@@ -1,0 +1,7 @@
+db_*
+docker-*
+Dockerfile
+conf
+./files
+./public/upload
+mongodb*
