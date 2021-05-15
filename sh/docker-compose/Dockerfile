@@ -1,10 +1,7 @@
 FROM ubuntu:latest
 
+VOLUME /leanote
+
 WORKDIR /leanote
-
-COPY . ./
-
-VOLUME /leanote/files
-VOLUME /leanote/public/upload
 
 ENTRYPOINT ["./bin/run.sh"]

@@ -21,10 +21,6 @@ services:
     restart: always
     build: .
     ports:
-      - 9000:9000
+      - "9000:9000"
     volumes:
-      - ./conf:/leanote/conf
-      - ./files:/leanote/files
-      - ./public/upload:/leanote/public/upload
-    links:
-      - mongo
+      - .:/leanote
