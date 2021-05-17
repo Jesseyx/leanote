@@ -20,6 +20,8 @@ services:
       - mongo
     restart: always
     build: .
+    environment:
+      TZ: Asia/Shanghai
     ports:
       - "9000:9000"
     volumes:
