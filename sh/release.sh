@@ -60,15 +60,9 @@ tarRelease()
 {
   echo "tar-$1-$2"
 
-  mkdir -p "$tmp"/leanote/bin
-
-  # move source
-  mv "$tmp/$1-$2"/src/github.com/leanote/leanote/* "$tmp"/leanote
-
-  # move bin
-  mv "$tmp/$1-$2"/* "$tmp"/leanote/bin
-
-  rm -rf "$tmp"/leanote/bin/src/github.com/leanote
+  # handle sources
+  rsync -a "$tmp/$1-$2"/src/github.com/leanote/ "$tmp"
+  rsync -a "$tmp/$1-$2"/ "$tmp"/leanote/bin --exclude github.com/leanote
 
   # fix run.sh
   sed -i '/pwd)/r '<(cat<<'EOF'
@@ -93,10 +87,6 @@ EOF
   # package
   tar -cf "$SCRIPT_PATH/$V/leanote-$1-$2-$V.bin.tar" -C "$tmp" leanote
   gzip "$SCRIPT_PATH/$V/leanote-$1-$2-$V.bin.tar"
-
-  # remove temp files
-  rm -rf "$tmp"/leanote
-  rm -rf "$tmp/$1-$2"
 }
 
 #tarRelease "linux" "386";
