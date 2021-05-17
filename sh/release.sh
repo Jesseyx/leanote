@@ -87,6 +87,9 @@ EOF
   # move docker env
   cp -rT "$SCRIPT_PATH"/docker-compose "$tmp"/leanote
 
+  # fix app conf
+  sed -i 's/\(db.host=\)127.0.0.1/\1mongo/' "$tmp"/leanote/conf/app.conf
+
   # package
   tar -cf "$SCRIPT_PATH/$V/leanote-$1-$2-$V.bin.tar" -C "$tmp" leanote
   gzip "$SCRIPT_PATH/$V/leanote-$1-$2-$V.bin.tar"
